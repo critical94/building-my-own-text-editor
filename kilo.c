@@ -14,7 +14,7 @@ void enableRawMode() {
     atexit(disableRawMode);
 
     struct termios raw = orig_termios;
-    raw.c_lflag &= ~(ECHO);
+    raw.c_lflag &= ~(ECHO | ICANON); // turn off echo and canonical mode to read byte-by-byte without 
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
 }
 
